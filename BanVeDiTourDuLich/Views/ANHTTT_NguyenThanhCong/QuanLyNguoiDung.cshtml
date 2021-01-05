@@ -1,0 +1,216 @@
+﻿@using PagedList.Mvc
+@using BanVeDiTourDuLich.Controllers
+@model BanVeDiTourDuLich.ViewModels.QuanLyNguoiDungViewModel
+@{
+    ViewBag.Title = "QuanLyNhanVien";
+    Layout = "~/Views/Shared/LayoutNew.cshtml";
+}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Quản lý người dùng</h1>
+
+
+                </div>
+
+
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Quản lý người dùng</li>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Người dùng</h3>
+            <div class="sort-box">
+                <select id="sort-selector">
+                    <option value="">--Chọn cách sắp xếp--</option>
+                    <option value="Ten">Tên Người Dùng</option>
+                    <option value="SoTien">Số Tiền Đã Mua</option>
+                    <option value="SoVe">Số Vé Đã Mua</option>
+                    <option value="NgayTao">Ngày Tạo</option>
+                </select>
+
+                <select id="sort-direction">
+                    <option value="">Chiều sắp xếp</option>
+                    <option value="1">Từ cao tới thấp</option>
+                    <option value="0">Từ thấp tới cao</option>
+                </select>
+
+                <button id="apply-sort">Áp Dụng</button>
+            </div>
+            <div class="card-tools">
+                <button type="button"
+                        class="btn btn-tool"
+                        data-card-widget="collapse"
+                        title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button"
+                        class="btn btn-tool"
+                        data-card-widget="remove"
+                        title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-striped projects">
+                <thead>
+                    <tr>
+                        <th style="width: 1%">#</th>
+                        <th style="width: 20%">Tên Người Dùng</th>
+                        <th style="width: 30%">Số tiền đã mua</th>
+                        <th>Số vé đã mua</th>
+                        <th style="width: 20%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int i = 1;}
+                    @foreach (var thongTinNguoiDung in Model.ThongTinCacNguoiDung)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>
+                                <a> @thongTinNguoiDung.TenNguoiDung </a>
+                                <br />
+                                <small> Tạo vào @thongTinNguoiDung.NgayTaoTaiKhoan.ToString("dd.MM.yyyy") </small>
+                            </td>
+                            <td>
+                                <p>@TourController.AddDotAndCommaToInteger(thongTinNguoiDung.SoTienMua) VNĐ</p>
+                            </td>
+
+                            <td>
+                                <p>@thongTinNguoiDung.SoVeMua vé</p>
+                            </td>
+                            <td class="project-actions text-center">
+
+                                <button class="btn-delete">
+                                    <a href="/ANHTTT_NguyenThanhCong/InforUser/@thongTinNguoiDung.MaNguoiDung" class="btn btn-danger btn-sm btn-max-width js-xoa">
+                                        <i class="fas fa-trash"> </i>
+                                        Chỉnh sửa
+                                    </a>
+                                </button>
+                                <form class="deleteForm" action="/Admin/XoaNguoiDung/" method="post">
+                                    <input name='id' type="hidden" value="@thongTinNguoiDung.MaNguoiDung" />
+                                    <button class="btn-delete" type='submit'>
+                                        <a class="btn btn-danger btn-sm btn-max-width js-xoa">
+                                            <i class="fas fa-trash"> </i>
+                                            Xóa
+                                        </a>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {
+                            i++;
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="container">
+
+            <div class="pagination">
+
+                <a href="/admin/quanlynguoidung?page=1">1</a>
+                <a href="/admin/quanlynguoidung?page=2">2</a>
+                <a href="/admin/quanlynguoidung?page=3">3</a>
+
+
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+    <!-- /.content -->
+</div>
+
+@section styles
+{
+    <style>
+        .js-xoa {
+            width: 100%
+        }
+
+        .btn-delete {
+            border: none;
+            width: 100%;
+            background: none;
+        }
+
+        .sort-box {
+            display: flex;
+            justify-content: center;
+        }
+
+        #sort-selector {
+            margin-right: 2rem;
+            font-family: 'Font Awesome 5 Free';
+        }
+
+        #sort-direction {
+            margin-right: 2rem;
+            font-family: 'Font Awesome 5 Free';
+        }
+
+        #apply-sort, #apply-sort:focus {
+            border: none;
+            background: deepskyblue;
+            padding: 0.5rem;
+            border-radius: 1rem;
+            font-family: 'Font Awesome 5 Free';
+            outline: none;
+        }
+
+            #apply-sort:hover {
+                background: rgba(0, 191, 255, 0.5);
+            }
+    </style>
+}
+
+@section scripts
+{
+    <script>
+        $('#apply-sort').click(function() {
+            var value = $('#sort-selector').val();
+            var direction = $('#sort-direction').val();
+            if (value != null && direction != null) {
+                window.location.href = `/admin/QuanLyNguoiDungSort?sortValue=${value}&sortDirection=${direction}`;
+            }
+        })
+
+        $('.deleteForm').submit(function(e) {
+            e.preventDefault();
+            var data = $(this).serialize();
+            var url = $(this).attr('action');
+            $.ajax({
+                method: 'POST',
+                url: url,
+                data: data,
+                success: function({ msg }) {
+                    alert(msg);
+                    window.location.reload();
+                },
+                error: function(data) {
+                    alert(data.responseJSON.msg);
+                }
+            });
+        });
+    </script>
+}

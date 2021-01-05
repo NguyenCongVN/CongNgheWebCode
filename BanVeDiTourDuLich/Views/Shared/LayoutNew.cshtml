@@ -1,7 +1,4 @@
 ﻿@{
-    var _context = new DataContext();
-    var nhanvien = _context.NhanViens.Find(Session["MaTaiKhoan"]);
-    var taiKhoan = _context.TaiKhoans.Find(Session["MaTaiKhoan"]);
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -100,12 +97,12 @@
     <div class="notification__box">
         <div class="notification__items">
             @*<div class="notification__item">
-                <img class="notification__image" src="/Content/images/Persions/ADMIN.jpg" />
-                <p class="notification__text">Khách hàng gửi tin nhắn cho bạn</p>
-                <button class="notification__button" onclick="addOutAnimation(this)">
-                    <i class="notification__icon fas fa-minus-circle"></i>
-                </button>
-            </div>*@
+                    <img class="notification__image" src="/Content/images/Persions/ADMIN.jpg" />
+                    <p class="notification__text">Khách hàng gửi tin nhắn cho bạn</p>
+                    <button class="notification__button" onclick="addOutAnimation(this)">
+                        <i class="notification__icon fas fa-minus-circle"></i>
+                    </button>
+                </div>*@
         </div>
     </div>
 
@@ -170,13 +167,13 @@
                 <!-- Sidebar user panel (optional) -->
                 <div id="chiTiet" class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="@nhanvien.DuongDanAnh"
+                        <img 
                              class="img-circle elevation-2"
                              alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">@nhanvien.Ten</a>
-                        <input class="MaTaiKhoan" type="hidden" value="@taiKhoan.MaTaiKhoan" />
+                        <a href="#" class="d-block">123</a>
+                        <input class="MaTaiKhoan" type="hidden" />
                     </div>
 
                 </div>
@@ -189,7 +186,7 @@
                         role="menu"
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-    with font-awesome or any other icon font library -->
+                        with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a id="#TongQuanLink" href="/admin/index" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -243,7 +240,7 @@
             </div>
             <!-- /.sidebar -->
         </aside>
-            @RenderBody()
+        @RenderBody()
         <footer class="main-footer">
             <strong>Bản quyền &copy; 2014-2020 <a href="#">Vacation</a>.</strong>
             Đã đăng kí bản quyền
@@ -289,7 +286,7 @@
     <script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
     <script src="~/signalr/hubs"></script>
     @RenderSection("scripts", false)
-<script>
+    <script>
 
     var chat = $.connection.chat;
     $.connection.hub.start().done(function () {
@@ -602,6 +599,6 @@
     //        check.value = "1";
     //    }
     //})
-</script>
+    </script>
 </body>
 </html>

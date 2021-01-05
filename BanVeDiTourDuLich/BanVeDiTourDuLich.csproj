@@ -176,6 +176,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\Startup.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ANHTTT_NguyenThanhCongController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\DatVeController.cs" />
@@ -2642,6 +2643,9 @@
     <Content Include="Views\Admin\EditLichTrinh.cshtml" />
     <Content Include="Views\Admin\QuanLyLichTrinh.cshtml" />
     <Content Include="Views\Admin\ThemLichTrinh.cshtml" />
+    <Content Include="Views\ANHTTT_NguyenThanhCong\QuanLyNguoiDung.cshtml" />
+    <Content Include="Views\ANHTTT_NguyenThanhCong\InforUser.cshtml" />
+    <Content Include="Views\Shared\LayoutNew.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
